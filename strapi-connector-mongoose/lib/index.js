@@ -120,26 +120,26 @@ module.exports = function (strapi) {
         //   'mongoose.js'
         // );
 
-      //   if (fs.existsSync(initFunctionPath)) {
-      //     require(initFunctionPath)(instance, connection);
-      //   }
+        // if (fs.existsSync(initFunctionPath)) {
+        //   require(initFunctionPath)(instance, connection);
+        // }
 
-      //   instance.set('debug', debug === true || debug === 'true');
-      //   instance.set('useFindAndModify', false);
+        // instance.set('debug', debug === true || debug === 'true');
+        // instance.set('useFindAndModify', false);
 
-      //   const ctx = {
-      //     instance,
-      //     connection,
-      //   };
+        // const ctx = {
+        //   instance,
+        //   connection,
+        // };
 
-      //   _.set(strapi, `connections.${connectionName}`, instance);
+        // _.set(strapi, `connections.${connectionName}`, instance);
 
-      //   return Promise.all([
-      //     mountComponents(connectionName, ctx),
-      //     mountApis(connectionName, ctx),
-      //     mountAdmin(connectionName, ctx),
-      //     mountPlugins(connectionName, ctx),
-      //   ]);
+        // return Promise.all([
+        //   mountComponents(connectionName, ctx),
+        //   mountApis(connectionName, ctx),
+        //   mountAdmin(connectionName, ctx),
+        //   mountPlugins(connectionName, ctx),
+        // ]);
       });
 
     return Promise.all(connectionsPromises);

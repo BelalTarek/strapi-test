@@ -10,10 +10,11 @@ class DatabaseManager {
     this.strapi = strapi;
 
     this.initialized = false;
-
+   
     this.queries = new Map();
     this.connectors = new Map();
     this.models = new Map();
+    this.initialize()
   }
 
   async initialize() {
@@ -24,7 +25,7 @@ class DatabaseManager {
     this.initialized = true;
 
     const connectorsToInitialize = [];
-    for (const connection of Object.values(this.strapi.config.connections)) {
+    for (const connection of Object.values(this.strapi)) {
       const { connector } = connection;
       if (!connectorsToInitialize.includes(connector)) {
         connectorsToInitialize.push(connector);
@@ -32,13 +33,14 @@ class DatabaseManager {
     }
 
     for (const connectorToInitialize of connectorsToInitialize) {
-      const connector = requireConnector(connectorToInitialize)(strapi);
+      const connector = requireConnector(connectorToInitialize)(this.strapi);
 
       this.connectors.set(connectorToInitialize, connector);
-      await connector.initialize();
+
+      await connector.initialize(this.strapi);
     }
 
-    this.initializeModelsMap();
+    // this.initializeModelsMap();
 
     return this;
   }
@@ -119,21 +121,9 @@ class DatabaseManager {
 }
 
 function createDatabaseManager(strapi) {
-  const connectorsToInitialize = [];
-  for (const connection of Object.values(strapi)) {
-    const { connector } = connection;
-    if (!connectorsToInitialize.includes(connector)) {
-      connectorsToInitialize.push(connector);
-    }
-  }
-
-  for (const connectorToInitialize of connectorsToInitialize) {
-    const connector = requireConnector(connectorToInitialize)(strapi);
-
-    // this.connectors.set(connectorToInitialize, connector);
-    connector.initialize(strapi);
-  }
+  return new DatabaseManager(strapi);
 }
+
 module.exports = {
   createDatabaseManager,
 };
