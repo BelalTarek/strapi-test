@@ -1,0 +1,17 @@
+{
+    "connections": {
+        "connector": "mongoose",
+        "settings": {
+            "uri": "mongodb://admin:admin1234@ds135514.mlab.com:35514/paymob",
+            "database": "paymob",
+            "host": "ds135514.mlab.com",
+            "srv": false,
+            "port": 35514,
+            "username": "admin",
+            "password": "admin1234"
+        },
+        "options": {
+            "authenticationDatabase": ""
+        }
+    }
+}

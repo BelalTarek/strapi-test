@@ -1,0 +1,396 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a OpenAPI 2 specification for API",
+        "version": "1.0.0",
+        "title": "OpenAPI MT"
+    },
+    "host": "virtserver.swaggerhub.com",
+    "basePath": "/RsAPI",
+    "tags": [
+        {
+            "name": "Installment",
+            "description": "Installments Managment Operations"
+        }
+    ],
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/Installment/{InstallmentId}": {
+            "get": {
+                "tags": [
+                    "Installment"
+                ],
+                "summary": "Get Installment by Id",
+                "operationId": "getInstallmentById",
+                "parameters": [
+                    {
+                        "name": "InstallmentId",
+                        "in": "path",
+                        "description": "ID of Installment",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Installment"
+                        }
+                    },
+                    "400": {
+                        "description": "Validation Error",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Record Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Installment_api_auth": [
+                            "write:Installment",
+                            "read:Installment"
+                        ]
+                    }
+                ],
+                "x-swagger-router-controller": "Installment"
+            }
+        },
+        "/Installment/find": {
+            "post": {
+                "tags": [
+                    "Installment"
+                ],
+                "summary": "Find Installment list by matching",
+                "operationId": "findInstallment",
+                "parameters": [
+                    {
+                        "name": "rps",
+                        "in": "query",
+                        "description": "Size of the page results in pagination",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "rpi",
+                        "in": "query",
+                        "description": "Current page index in pagination",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "body",
+                        "name": "Installment",
+                        "description": "sample Installment object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Installment"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/inline_response_200"
+                        }
+                    },
+                    "400": {
+                        "description": "Validation Error",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Record Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Installment_api_auth": [
+                            "write:Installment",
+                            "read:Installment"
+                        ]
+                    }
+                ],
+                "x-swagger-router-controller": "Installment"
+            }
+        },
+        "/Installment/{InstallmentId}/pay": {
+            "post": {
+                "tags": [
+                    "Installment"
+                ],
+                "summary": "execute pay againest Certain Object Installment",
+                "operationId": "executePay",
+                "parameters": [
+                    {
+                        "name": "InstallmentId",
+                        "in": "path",
+                        "description": "ID of Installment that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "Installment",
+                        "description": "Installment object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Installment"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Installment"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Installment not found",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Installment_api_auth": [
+                            "write:Installment",
+                            "read:Installment"
+                        ]
+                    }
+                ],
+                "x-swagger-router-controller": "Installment"
+            }
+        }
+    },
+    "securityDefinitions": {
+        "Installment_api_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://tasaheel.swagger.io/oauth/authorize",
+            "flow": "implicit",
+            "scopes": {
+                "write:Installment": "modify loans in your account",
+                "read:Installment": "read your loans"
+            }
+        },
+        "api_key": {
+            "type": "apiKey",
+            "name": "rs_api_key",
+            "in": "header"
+        }
+    },
+    "definitions": {
+        "Installment": {
+            "type": "object",
+            "properties": {
+                "client_natinoal_id": {
+                    "type": "string"
+                },
+                "client_name": {
+                    "type": "string"
+                },
+                "client_code": {
+                    "type": "string"
+                },
+                "fi_code": {
+                    "type": "string"
+                },
+                "client_address": {
+                    "type": "string"
+                },
+                "client_date_of_birth": {
+                    "type": "string"
+                },
+                "client_gender": {
+                    "type": "string"
+                },
+                "client_phone": {
+                    "type": "string"
+                },
+                "due_amount_including_penalty": {
+                    "type": "string"
+                },
+                "due_date": {
+                    "type": "string"
+                },
+                "due_penalty": {
+                    "type": "string"
+                },
+                "installment_number": {
+                    "type": "string"
+                },
+                "remaining_amount_of_loan": {
+                    "type": "string"
+                },
+                "created_dated": {
+                    "type": "string"
+                },
+                "last_update": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "client_phone": "client_phone",
+                "remaining_amount_of_loan": "remaining_amount_of_loan",
+                "due_date": "due_date",
+                "client_date_of_birth": "client_date_of_birth",
+                "due_amount_including_penalty": "due_amount_including_penalty",
+                "installment_number": "installment_number",
+                "created_dated": "created_dated",
+                "last_update": "last_update",
+                "client_natinoal_id": "client_natinoal_id",
+                "client_address": "client_address",
+                "due_penalty": "due_penalty",
+                "client_name": "client_name",
+                "client_gender": "client_gender"
+            }
+        },
+        "ApiResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "ResultReport": {
+            "type": "object",
+            "properties": {
+                "totalCount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "pageSize": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "pageIndex": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "example": {
+                "pageIndex": 1,
+                "pageSize": 6,
+                "totalCount": 0
+            }
+        },
+        "inline_response_200": {
+            "type": "object",
+            "properties": {
+                "resultreport": {
+                    "$ref": "#/definitions/ResultReport"
+                },
+                "results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Installment"
+                    }
+                }
+            },
+            "example": {
+                "resultreport": {
+                    "pageIndex": 1,
+                    "pageSize": 6,
+                    "totalCount": 0
+                },
+                "results": [
+                    {
+                        "client_phone": "client_phone",
+                        "remaining_amount_of_loan": "remaining_amount_of_loan",
+                        "due_date": "due_date",
+                        "client_date_of_birth": "client_date_of_birth",
+                        "due_amount_including_penalty": "due_amount_including_penalty",
+                        "installment_number": "installment_number",
+                        "created_dated": "created_dated",
+                        "last_update": "last_update",
+                        "client_natinoal_id": "client_natinoal_id",
+                        "client_address": "client_address",
+                        "due_penalty": "due_penalty",
+                        "client_name": "client_name",
+                        "client_gender": "client_gender"
+                    },
+                    {
+                        "client_phone": "client_phone",
+                        "remaining_amount_of_loan": "remaining_amount_of_loan",
+                        "due_date": "due_date",
+                        "client_date_of_birth": "client_date_of_birth",
+                        "due_amount_including_penalty": "due_amount_including_penalty",
+                        "installment_number": "installment_number",
+                        "created_dated": "created_dated",
+                        "last_update": "last_update",
+                        "client_natinoal_id": "client_natinoal_id",
+                        "client_address": "client_address",
+                        "due_penalty": "due_penalty",
+                        "client_name": "client_name",
+                        "client_gender": "client_gender"
+                    }
+                ]
+            }
+        }
+    }
+}
