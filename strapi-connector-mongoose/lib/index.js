@@ -24,19 +24,22 @@ const queries = require('./queries');
  */
 
 const defaults = {
-  defaultConnection: 'default',
-  host: 'localhost',
-  port: 27017,
-  database: 'strapi',
-  authenticationDatabase: '',
-  ssl: false,
-  debug: false,
-};
+  uri: "mongodb://admin:admin1234@ds135514.mlab.com:35514/paymob",
+  database: "paymob",
+  host: "ds135514.mlab.com",
+  srv: false,
+  port: 35514,
+  username: "admin",
+  password: "admin1234",
+  options: {
+    authenticationDatabase: ""
+  }
+}
 
 const isMongooseConnection = ({ connector }) => connector === 'mongoose';
 
 module.exports = function (strapi) {
-  function initialize(connections) {
+  function initialize(connections,models) {
     // const { connections } = strapi.config;
 
     const connectionsPromises = Object.keys(connections)
@@ -114,7 +117,7 @@ module.exports = function (strapi) {
         }
 
         // const initFunctionPath = path.resolve(
-        //   strapi.config.appPath,
+        //   'strapi.config.appPath',
         //   'config',
         //   'functions',
         //   'mongoose.js'
@@ -135,69 +138,69 @@ module.exports = function (strapi) {
         // _.set(strapi, `connections.${connectionName}`, instance);
 
         // return Promise.all([
-        //   mountComponents(connectionName, ctx),
-        //   mountApis(connectionName, ctx),
-        //   mountAdmin(connectionName, ctx),
-        //   mountPlugins(connectionName, ctx),
+        //   // mountComponents(connectionName, ctx),
+        //   mountApis(connectionName,models, ctx),
+        //   // mountAdmin(connectionName, ctx),
+        //   // mountPlugins(connectionName, ctx),
         // ]);
       });
 
-    return Promise.all(connectionsPromises);
+    // return Promise.all(connectionsPromises);
   }
 
-  function mountComponents(connectionName, ctx) {
-    const options = {
-      models: _.pickBy(
-        strapi.components,
-        ({ connection }) => connection === connectionName
-      ),
-      target: strapi.components,
-    };
+  // function mountComponents(connectionName, ctx) {
+  //   const options = {
+  //     models: _.pickBy(
+  //       strapi.components,
+  //       ({ connection }) => connection === connectionName
+  //     ),
+  //     // target: strapi.components,
+  //   };
 
-    return mountModels(options, ctx);
-  }
+  //   return mountModels(options, ctx);
+  // }
 
-  function mountApis(connectionName, ctx) {
-    const options = {
-      models: _.pickBy(
-        strapi.models,
-        ({ connection }) => connection === connectionName
-      ),
-      target: strapi.models,
-    };
+  // function mountApis(connectionName,models, ctx) {
+  //   const options = {
+  //     models: _.pickBy(
+  //       models,
+  //       ({ connection }) => connection === connectionName
+  //     ),
+  //     // target: strapi.models,
+  //   };
 
-    return mountModels(options, ctx);
-  }
+  //   return mountModels(options, ctx);
+  // }
 
-  function mountAdmin(connectionName, ctx) {
-    const options = {
-      models: _.pickBy(
-        strapi.admin.models,
-        ({ connection }) => connection === connectionName
-      ),
-      target: strapi.admin.models,
-    };
+  // function mountAdmin(connectionName, ctx) {
+  //   const options = {
+  //     models: _.pickBy(
+  //       strapi.admin.models,
+  //       ({ connection }) => connection === connectionName
+  //     ),
+  //     target: strapi.admin.models,
+  //   };
 
-    return mountModels(options, ctx);
-  }
+  //   return mountModels(options, ctx);
+  // }
 
-  function mountPlugins(connectionName, ctx) {
-    return Promise.all(
-      Object.keys(strapi.plugins).map(name => {
-        const plugin = strapi.plugins[name];
-        return mountModels(
-          {
-            models: _.pickBy(
-              plugin.models,
-              ({ connection }) => connection === connectionName
-            ),
-            target: plugin.models,
-          },
-          ctx
-        );
-      })
-    );
-  }
+  // function mountPlugins(connectionName, ctx) {
+  //   return Promise.all(
+  //     Object.keys(strapi.plugins).map(name => {
+  //       const plugin = strapi.plugins[name];
+  //       return mountModels(
+  //         {
+  //           models: _.pickBy(
+  //             plugin.models,
+  //             ({ connection }) => connection === connectionName
+  //           ),
+  //           target: plugin.models,
+  //         },
+  //         ctx
+  //       );
+  //     })
+  //   );
+  // }
 
   return {
     defaults,

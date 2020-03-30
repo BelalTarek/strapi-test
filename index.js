@@ -1,9 +1,9 @@
 'use strict';
 
 var fs = require('fs'),
-    path = require('path'),
-    http = require('http'),
-    cors = require("cors");
+  path = require('path'),
+  http = require('http'),
+  cors = require("cors");
 require('dotenv').config();
 var app = require('connect')();
 var swaggerTools = require('swagger-tools');
@@ -16,10 +16,33 @@ const dbConfig = require('./databaseConfig.json')
 // reading swagger definitions and convert to mongoose
 var swagger = fs.readFileSync(path.join(__dirname, './swagger.json'));
 
-exports.models = swaggerMongoose.compile(swagger, { default:{'schema-options' :{ timestamps: true } }}).models;
+var models = swaggerMongoose.compile(swagger, { default: { 'schema-options': { timestamps: true } } }).models;
 
-dbMangment.createDatabaseManager(dbConfig)
+var dbM = dbMangment.createDatabaseManager(dbConfig)
+// DB *(Mongo, Mongoose)*
+const mongoose = require('mongoose');
+const mongo_uri =
+  process.env.MONGO_URL || 'mongodb://admin:admin1234@ds135514.mlab.com:35514/paymob';
+mongoose.connect(
+  mongo_uri,
+  {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useCreateIndex: true
+  },
+  function (err) {
+    if (err) {
+      throw err;
+    } else {
+      console.log(`Successfully connected to ${mongo_uri}`);
+    }
+  }
+);
 
+module.exports = {
+  models,
+  dbM
+};
 // swaggerRouter configuration
 var options = {
   // swaggerUi: path.join(__dirname, '/swagger.json'),
@@ -28,7 +51,7 @@ var options = {
 };
 
 // The Swagger document (require it, build it programmatically, fetch it from a URL, ...)
-var spec = fs.readFileSync(path.join(__dirname,'api/swagger.yaml'), 'utf8');
+var spec = fs.readFileSync(path.join(__dirname, 'api/swagger.yaml'), 'utf8');
 var swaggerDoc = jsyaml.safeLoad(spec);
 
 app.use(cors());

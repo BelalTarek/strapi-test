@@ -25,7 +25,7 @@ class DatabaseManager {
     this.initialized = true;
 
     const connectorsToInitialize = [];
-    for (const connection of Object.values(this.strapi)) {
+    for (const connection of Object.values(this.strapi.connections)) {
       const { connector } = connection;
       if (!connectorsToInitialize.includes(connector)) {
         connectorsToInitialize.push(connector);
@@ -33,11 +33,11 @@ class DatabaseManager {
     }
 
     for (const connectorToInitialize of connectorsToInitialize) {
-      const connector = requireConnector(connectorToInitialize)(this.strapi);
+      const connector = requireConnector(connectorToInitialize)(this.strapi.connections);
 
       this.connectors.set(connectorToInitialize, connector);
 
-      await connector.initialize(this.strapi);
+      await connector.initialize(this.strapi.connections);
     }
 
     // this.initializeModelsMap();

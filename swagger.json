@@ -29,7 +29,7 @@
                     "Installment"
                 ],
                 "summary": "Get Installment by Id",
-                "operationId": "getInstallmentById",
+                "operationId": "getInstallments",
                 "parameters": [
                     {
                         "name": "InstallmentId",

@@ -2,9 +2,9 @@
 
 const Installment = require('../dal/InstallmentDal');
 
-exports.getInstallments = function (installmentId) {
+exports.getInstallments = function () {
   return new Promise(function (resolve, reject) {
-    Installment.getInstallments(installmentId, (err, data) => {
+    Installment.getInstallments( (err, data) => {
       if (err || !data) {
         reject({
           resBody: {

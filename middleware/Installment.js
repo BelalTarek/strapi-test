@@ -5,6 +5,6 @@ var Installment = require("../controllers/Installment");
 module.exports.getInstallments = function getInstallments (req, res, next) {
   // tokenValidation(req, res, (succes) => {
   //   if (succes)
-  Installment.getInstallmentById(req, res);
+  Installment.getInstallments(req, res);
   //});
 };
