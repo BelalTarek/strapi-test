@@ -39,7 +39,7 @@ const defaults = {
 const isMongooseConnection = ({ connector }) => connector === 'mongoose';
 
 module.exports = function (strapi) {
-  function initialize(connections,models) {
+  function initialize(connections) {
     // const { connections } = strapi.config;
 
     const connectionsPromises = Object.keys(connections)

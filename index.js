@@ -11,7 +11,7 @@ var jsyaml = require('js-yaml');
 var dbMangment = require('./strapi-database/lib/index')
 var serverPort = process.env.PORT || 3005;
 const swaggerMongoose = require('swagger-mongoose');
-const dbConfig = require('./databaseConfig.json')
+const dbConfig = require('./database.json')
 
 // reading swagger definitions and convert to mongoose
 var swagger = fs.readFileSync(path.join(__dirname, './swagger.json'));
@@ -20,24 +20,24 @@ var models = swaggerMongoose.compile(swagger, { default: { 'schema-options': { t
 
 var dbM = dbMangment.createDatabaseManager(dbConfig)
 // DB *(Mongo, Mongoose)*
-const mongoose = require('mongoose');
-const mongo_uri =
-  process.env.MONGO_URL || 'mongodb://admin:admin1234@ds135514.mlab.com:35514/paymob';
-mongoose.connect(
-  mongo_uri,
-  {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useCreateIndex: true
-  },
-  function (err) {
-    if (err) {
-      throw err;
-    } else {
-      console.log(`Successfully connected to ${mongo_uri}`);
-    }
-  }
-);
+// const mongoose = require('mongoose');
+// const mongo_uri =
+//   process.env.MONGO_URL || 'mongodb://admin:admin1234@ds135514.mlab.com:35514/paymob';
+// mongoose.connect(
+//   mongo_uri,
+//   {
+//     useUnifiedTopology: true,
+//     useNewUrlParser: true,
+//     useCreateIndex: true
+//   },
+//   function (err) {
+//     if (err) {
+//       throw err;
+//     } else {
+//       console.log(`Successfully connected to ${mongo_uri}`);
+//     }
+//   }
+// );
 
 module.exports = {
   models,

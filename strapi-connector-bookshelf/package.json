@@ -1,0 +1,90 @@
+{
+  "_from": "strapi-connector-bookshelf@3.0.0-beta.19.5",
+  "_id": "strapi-connector-bookshelf@3.0.0-beta.19.5",
+  "_inBundle": false,
+  "_integrity": "sha512-Qk/JisXa109qrAQWGlp7oP26dk+iqYpj3yXczgGux4EqhskHcTsNdViFdpDw99eui4XrUjM6JKK8htPuiQ3KRA==",
+  "_location": "/strapi-connector-bookshelf",
+  "_phantomChildren": {
+    "glob": "7.1.6"
+  },
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "strapi-connector-bookshelf@3.0.0-beta.19.5",
+    "name": "strapi-connector-bookshelf",
+    "escapedName": "strapi-connector-bookshelf",
+    "rawSpec": "3.0.0-beta.19.5",
+    "saveSpec": null,
+    "fetchSpec": "3.0.0-beta.19.5"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/strapi-connector-bookshelf/-/strapi-connector-bookshelf-3.0.0-beta.19.5.tgz",
+  "_shasum": "ba6d5e5752be61790e3be7686640917f50e8453f",
+  "_spec": "strapi-connector-bookshelf@3.0.0-beta.19.5",
+  "_where": "/home/belal/Downloads/strapi-master/test-two",
+  "author": {
+    "name": "Strapi team",
+    "email": "hi@strapi.io",
+    "url": "http://strapi.io"
+  },
+  "bugs": {
+    "url": "https://github.com/strapi/strapi/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "bookshelf": "^1.0.1",
+    "date-fns": "^2.8.1",
+    "inquirer": "^6.3.1",
+    "lodash": "^4.17.11",
+    "pluralize": "^7.0.0",
+    "rimraf": "3.0.0",
+    "strapi-utils": "3.0.0-beta.19.5"
+  },
+  "deprecated": false,
+  "description": "Bookshelf hook for the Strapi framework",
+  "directories": {
+    "lib": "./lib"
+  },
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  },
+  "gitHead": "8d56e0c12f8a3b42537db341b84c5e6bbe34a60b",
+  "homepage": "http://strapi.io",
+  "keywords": [
+    "bookshelf",
+    "hook",
+    "migrations",
+    "orm",
+    "sql",
+    "strapi"
+  ],
+  "license": "MIT",
+  "main": "./lib",
+  "maintainers": [
+    {
+      "name": "Strapi team",
+      "email": "hi@strapi.io",
+      "url": "http://strapi.io"
+    }
+  ],
+  "name": "strapi-connector-bookshelf",
+  "peerDependencies": {
+    "knex": "^0.20.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/strapi/strapi.git"
+  },
+  "scripts": {
+    "test": "echo not tests yet"
+  },
+  "strapi": {
+    "dependencies": [
+      "knex"
+    ]
+  },
+  "version": "3.0.0-beta.19.5"
+}
