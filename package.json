@@ -31,7 +31,7 @@
     "strapi-connector-bookshelf": "file:strapi-connector-bookshelf",
     "strapi-connector-mongoose": "file:strapi-connector-mongoose",
     "swagger-mongoose": "^1.1.2",
-    "swagger-tools": "0.10.1"
+    "swagger-tools": "0.10.4"
   },
   "devDependencies": {
     "cors": "^2.8.5"
