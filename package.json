@@ -21,7 +21,7 @@
     "js-yaml": "^3.3.0",
     "jsonwebtoken": "^8.5.1",
     "kafka-node": "^5.0.0",
-    "knex": "^0.20.13",
+    "knex": "^2.4.0",
     "mongoose": "^5.7.7",
     "mongoose-data-seed": "^2.1.4",
     "node-rdkafka": "^2.7.4",
